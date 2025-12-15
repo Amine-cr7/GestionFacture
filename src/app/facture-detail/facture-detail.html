@@ -1,0 +1,34 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-6">Facture #{{ factureId }} - Détails</h2>
+
+  <table class="w-full border">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border p-2">ID Ligne</th>
+        <th class="border p-2">Produit</th>
+        <th class="border p-2">Prix Unitaire</th>
+        <th class="border p-2">Quantité</th>
+        <th class="border p-2">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (ligne of lignes(); track ligne.idLigne) {
+        @if (ligne.numFacture === factureId) {
+          <tr>
+            <td class="border p-2">{{ ligne.idLigne }}</td>
+            <td class="border p-2">{{ getProduitNom(ligne.produitId) }}</td>
+            <td class="border p-2">{{ getProduitPrix(ligne.produitId) }} DH</td>
+            <td class="border p-2">{{ ligne.qte }}</td>
+            <td class="border p-2">{{ getTotal(ligne.produitId, ligne.qte) }} DH</td>
+          </tr>
+        }
+      }
+    </tbody>
+    <tfoot>
+      <tr class="bg-gray-50 font-bold">
+        <td colspan="4" class="border p-2 text-right">Total Facture:</td>
+        <td class="border p-2">{{ getFactureTotal() }} DH</td>
+      </tr>
+    </tfoot>
+  </table>
+</div>

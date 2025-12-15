@@ -1,0 +1,59 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-6">Clients List</h2>
+
+  <form (submit)="saveClient($event)" class="mb-8">
+    <div class="mb-4">
+      <label class="block mb-1">Nom:</label>
+      <input 
+        type="text" 
+        [(ngModel)]="nom" 
+        name="nom"
+        class="border px-3 py-2 rounded w-full"
+      >
+    </div>
+
+    <div class="mb-4">
+      <label class="block mb-1">Prenom:</label>
+      <input 
+        type="text" 
+        [(ngModel)]="prenom" 
+        name="prenom"
+        class="border px-3 py-2 rounded w-full"
+      >
+    </div>
+
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+      {{ editId() !== null ? 'update' : 'save' }}
+      </button>
+    
+  </form>
+  
+    @if(editId() !== null){
+        <button class="mb-4 bg-gray-500 text-white px-4 py-2 rounded" (click)="cancel()">cancel</button>
+    }
+
+  <table class="w-full border">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border p-2">ID</th>
+        <th class="border p-2">Nom</th>
+        <th class="border p-2">Prénom</th>
+        <th class="border p-2">Supprimer</th>
+        <th class="border p-2">Update</th>
+        
+        
+      </tr>
+    </thead>
+    <tbody>
+      @for (client of clients(); track client.clientId) {
+        <tr>
+          <td class="border p-2">{{client.clientId}}</td>
+          <td class="border p-2">{{client.nom}}</td>
+          <td class="border p-2">{{client.prenom}}</td>
+          <td class="border p-2"><button class="bg-red-500 text-white px-4 py-2 rounded" (click)="supprimerClient(client.clientId)">Supprimer</button></td>
+          <td class="border p-2"><button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="modifierClient(client.clientId)">Modifier</button></td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

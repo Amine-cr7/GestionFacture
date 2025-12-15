@@ -1,0 +1,99 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-6">Factures</h2>
+
+  <form class="mb-8" (submit)="saveFacture($event)">
+    <div class="mb-4">
+      <label class="block mb-1">Date:</label>
+      <input type="date" [(ngModel)]="date" name="date" class="border px-3 py-2 rounded w-full" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block mb-1">Client:</label>
+      <select class="border px-3 py-2 rounded w-full" [(ngModel)]="clientId" name="clientId" id="">
+        <option value="">Sélectionner un client</option>
+        @for (client of clients(); track client.clientId) {
+        <option value="{{ client.clientId }}">{{ client.nom }} {{ client.prenom }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="mb-6">
+      <h3 class="text-xl font-semibold mb-4">Produits</h3>
+
+      @for(produit of produits(); track produit.numProduit){
+      <div class="flex items-center gap-4 mb-3 p-3 border rounded">
+        <p class="flex-1 font-medium">{{ produit.nom }}</p>
+        <div class="flex items-center gap-2">
+          <label class="text-sm">Quantité:</label>
+          <input
+            type="number"
+            [(ngModel)]="qte[produit.numProduit]"
+            class="border px-3 py-2 rounded w-20"
+            min="0"
+            name="qte"
+          />
+        </div>
+        <p class="font-semibold w-24 text-right">
+          {{
+            qte[produit.numProduit] > 0 ? qte[produit.numProduit] * produit.prix : produit.prix
+          }}
+          DH
+        </p>
+        @if(produit.numProduit in lignes ){
+        <button
+          class="bg-red-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          (click)="Remove(produit.numProduit)"
+        >
+          Remove
+        </button>
+        } @else {
+
+        <button
+          type="button"
+          class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          (click)="Add(produit.numProduit)"
+        >
+          Ajouter
+        </button>
+        }
+      </div>
+      }
+    </div>
+    <div class="mt-6 mb-2 p-4 border rounded bg-gray-50 flex justify-between items-center">
+      <span class="text-lg font-semibold">Total Facture:</span>
+      <span class="text-xl font-bold text-green-600">{{ getTotal() }} DH</span>
+    </div>
+
+    <button type="submit" class=" bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">
+      Créer Facture
+    </button>
+  </form>
+
+  <table class="w-full border">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border p-2">Numéro</th>
+        <th class="border p-2">Date</th>
+        <th class="border p-2">Client</th>
+        <th class="border p-2">Total</th>
+        <th class="border p-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (facture of factures(); track facture.numFacture) {
+      <tr>
+        <td class="border p-2">{{ facture.numFacture }}</td>
+        <td class="border p-2">{{ facture.date }}</td>
+        <td class="border p-2">{{ getNomClient(facture.clientId) }}</td>
+        <td class="border p-2">{{ facture.total }} Dh</td>
+        <td class="border p-2">
+          <button
+          [routerLink]="['/factures', facture.numFacture]"
+           class="bg-blue-500 text-white px-3 py-1 rounded mr-2">Voir</button>
+          <button class="bg-red-500 text-white px-3 py-1 rounded">Supprimer</button>
+        </td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>

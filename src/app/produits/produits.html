@@ -1,0 +1,65 @@
+<div class="p-6">
+  <h2 class="text-2xl font-bold mb-6">Produits List</h2>
+
+  <form (submit)="saveProduit($event)" class="mb-8">
+    <div class="mb-4">
+      <label class="block mb-1">Nom:</label>
+      <input 
+        type="text" 
+        [(ngModel)]="nom" 
+        name="nom"
+        class="border px-3 py-2 rounded w-full"
+      >
+    </div>
+
+    <div class="mb-4">
+      <label class="block mb-1">Prix:</label>
+      <input 
+        type="number" 
+        [(ngModel)]="prix" 
+        name="prix"
+        step="0.01"
+        class="border px-3 py-2 rounded w-full"
+      >
+    </div>
+
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+      {{ editNum() !== null ? 'update' : 'save' }}
+    </button>
+  </form>
+  
+  @if(editNum() !== null){
+    <button (click)="cancel()" class="mb-4 bg-gray-500 text-white px-4 py-2 rounded">cancel</button>
+  }
+
+  <table class="w-full border">
+    <thead>
+      <tr class="bg-gray-100">
+        <th class="border p-2">Numéro</th>
+        <th class="border p-2">Nom</th>
+        <th class="border p-2">Prix</th>
+        <th class="border p-2">Supprimer</th>
+        <th class="border p-2">Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (produit of produits(); track produit.numProduit) {
+        <tr>
+          <td class="border p-2">{{produit.numProduit}}</td>
+          <td class="border p-2">{{produit.nom}}</td>
+          <td class="border p-2">{{produit.prix}} DH</td>
+          <td class="border p-2">
+            <button class="bg-red-500 text-white px-4 py-2 rounded" (click)="supprimerProduit(produit.numProduit)">
+              Supprimer
+            </button>
+          </td>
+          <td class="border p-2">
+            <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="modifierProduit(produit.numProduit)">
+              Modifier
+            </button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
