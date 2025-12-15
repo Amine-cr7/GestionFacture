@@ -1,3 +1,37 @@
+
+# Gestion Facture
+
+Une application de gestion de factures développée avec **Angular** et **Dexie.js**.
+
+---
+
+## Description
+
+Gestion Facture permet aux utilisateurs de gérer facilement les **clients**, les **produits** et les **factures**.  
+L'application permet d'ajouter des clients et des produits, de créer des factures et de consulter leurs détails.  
+Toutes les données sont stockées localement dans le navigateur grâce à **Dexie (IndexedDB)**.
+
+---
+
+## Fonctionnalités
+
+- Gestion des **clients** : ajout, modification, suppression.  
+- Gestion des **produits** : ajout, modification, suppression.  
+- Création et gestion des **factures**.  
+- Consultation des détails des factures.  
+- Stockage local des données (IndexedDB) pour une persistance dans le navigateur.  
+
+---
+
+## Technologies utilisées
+
+- **Angular** (TypeScript / HTML / CSS)  
+- **Dexie.js** (wrapper pour IndexedDB)  
+- **HTML / CSS / TypeScript**
+
+---
+
+
 ## Captures d'écran
 
 **Page Clients :**
