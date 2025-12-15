@@ -1,3 +1,26 @@
+## Captures d'écran
+
+**Page Clients :**
+
+![Clients](screenshots/clients.png)
+
+**Page Produits :**
+
+![Produits](screenshots/produits.png)
+
+**Page Ajouter Facture :**
+
+![Ajouter Facture](screenshots/addFacture.png)
+
+**Page Détails Facture :**
+
+![Détails Facture](screenshots/detailFacture.png)
+
+
+
+
+
+
 # GestionFacture
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
